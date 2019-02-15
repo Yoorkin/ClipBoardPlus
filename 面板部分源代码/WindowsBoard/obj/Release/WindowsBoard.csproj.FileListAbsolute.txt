@@ -1,0 +1,16 @@
+E:\QQPCmgr\Desktop\WindowsBoard+\WindowsBoard\bin\Release\WindowsBoard.exe.config
+E:\QQPCmgr\Desktop\WindowsBoard+\WindowsBoard\bin\Release\WindowsBoard.exe
+E:\QQPCmgr\Desktop\WindowsBoard+\WindowsBoard\bin\Release\WindowsBoard.pdb
+E:\QQPCmgr\Desktop\WindowsBoard+\WindowsBoard\obj\Release\MainWindow.g.cs
+E:\QQPCmgr\Desktop\WindowsBoard+\WindowsBoard\obj\Release\Sign.g.cs
+E:\QQPCmgr\Desktop\WindowsBoard+\WindowsBoard\obj\Release\App.g.cs
+E:\QQPCmgr\Desktop\WindowsBoard+\WindowsBoard\obj\Release\GeneratedInternalTypeHelper.g.cs
+E:\QQPCmgr\Desktop\WindowsBoard+\WindowsBoard\obj\Release\WindowsBoard_MarkupCompile.cache
+E:\QQPCmgr\Desktop\WindowsBoard+\WindowsBoard\obj\Release\WindowsBoard_MarkupCompile.lref
+E:\QQPCmgr\Desktop\WindowsBoard+\WindowsBoard\obj\Release\MainWindow.baml
+E:\QQPCmgr\Desktop\WindowsBoard+\WindowsBoard\obj\Release\Sign.baml
+E:\QQPCmgr\Desktop\WindowsBoard+\WindowsBoard\obj\Release\WindowsBoard.g.resources
+E:\QQPCmgr\Desktop\WindowsBoard+\WindowsBoard\obj\Release\WindowsBoard.Properties.Resources.resources
+E:\QQPCmgr\Desktop\WindowsBoard+\WindowsBoard\obj\Release\WindowsBoard.csproj.GenerateResource.Cache
+E:\QQPCmgr\Desktop\WindowsBoard+\WindowsBoard\obj\Release\WindowsBoard.exe
+E:\QQPCmgr\Desktop\WindowsBoard+\WindowsBoard\obj\Release\WindowsBoard.pdb
