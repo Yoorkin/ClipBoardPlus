@@ -86,10 +86,10 @@ namespace WindowsBoard
         public System.Windows.Forms.NotifyIcon notifyIcon=new System.Windows.Forms.NotifyIcon();
         public ClipBoardViewer(Window window)
         {
-            DirectoryInfo Dir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\ClipBoardData\\ScreenShotData");
-            FileInfo[] ListFile = Dir.GetFiles();
-            foreach(FileInfo info in ListFile)
-                File.Delete(info.FullName);
+            //DirectoryInfo Dir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\ClipBoardData\\ScreenShotData");
+            //FileInfo[] ListFile = Dir.GetFiles();
+            //foreach(FileInfo info in ListFile)
+            //    File.Delete(info.FullName);
 
 
             Board = window as MainWindow;
