@@ -537,7 +537,6 @@
             <TextBlock Text="未开启剪贴板监视" Margin="0,0,180,0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="#99ffffff"/>
         </Grid>
         <local:MyImageButton x:Name="Clean" Click="Clean_Click"  HorizontalAlignment="Left" Height="49" Margin="352,0,0,0" VerticalAlignment="Top" Width="48"/>
-        <local:MyImageButton x:Name="ScreenShoot" Click="ScreenShoot_Click"  HorizontalAlignment="Left" Height="49" Margin="304,0,0,0" VerticalAlignment="Top" Width="48"/>
         <Grid x:Name="ConfirmCleanBtn" Visibility="Hidden" HorizontalAlignment="Right" Height="49" VerticalAlignment="Top" Width="48">
             <Rectangle Fill="Firebrick"/>
             <local:MyImageButton x:Name="ConfirmClean"  Foreground="White"  Content="清空" LostFocus="ConfirmClean_LostFocus" Click="ConfirmClean_Click"/>

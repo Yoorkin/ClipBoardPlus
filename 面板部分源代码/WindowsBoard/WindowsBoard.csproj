@@ -56,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AppRegistry.cs" />
     <Compile Include="Sign.xaml.cs">
       <DependentUpon>Sign.xaml</DependentUpon>
     </Compile>
@@ -69,6 +70,7 @@
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Page Include="Sign.xaml">
       <SubType>Designer</SubType>

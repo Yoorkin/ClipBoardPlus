@@ -28,46 +28,7 @@ using Microsoft;
 
 namespace WindowsBoard
 {
-    public class AppRegedit
-    {
 
-        public static bool AutoRun
-        {
-            set
-            {
-                RegistryKey runkey = Registry.LocalMachine.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run");
-                if(value)
-                    runkey.SetValue("ClipBoardPlus","\""+AppDomain.CurrentDomain.BaseDirectory+"ClipBoard+.exe\"");
-                else
-                    runkey.DeleteValue("ClipBoardPlus");
-                runkey.Close();
-            }
-            get
-            {
-                RegistryKey runkey = Registry.LocalMachine.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run");
-                foreach (string key in runkey.GetValueNames())
-                    if (key == "ClipBoardPlus") return true;
-                
-                return false;
-            }
-        }
-        public static void Set(string name,object value)
-        {
-            RegistryKey Key = Registry.LocalMachine.CreateSubKey("software\\ClipBoardPlus");
-            Key.SetValue(name, value);
-            Key.Close();
-        }
-        public static object Get(string name)
-        {
-            RegistryKey Key = Registry.LocalMachine.CreateSubKey("software\\ClipBoardPlus");
-            return Key.GetValue(name);
-        }
-        public static object Get(string name,object DefaultValue)
-        {
-            RegistryKey Key = Registry.LocalMachine.CreateSubKey("software\\ClipBoardPlus");
-            return Key.GetValue(name,DefaultValue);
-        }
-    }
     public class ClipBoardViewer: System.Windows.Forms.Form
     {
         [DllImport("User32.dll")]
@@ -86,37 +47,36 @@ namespace WindowsBoard
         public System.Windows.Forms.NotifyIcon notifyIcon=new System.Windows.Forms.NotifyIcon();
         public ClipBoardViewer(Window window)
         {
-            //DirectoryInfo Dir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\ClipBoardData\\ScreenShotData");
-            //FileInfo[] ListFile = Dir.GetFiles();
-            //foreach(FileInfo info in ListFile)
-            //    File.Delete(info.FullName);
-
-
+            
             Board = window as MainWindow;
-            nextClipboardViewer = (IntPtr)ClipBoardViewer.SetClipboardViewer((int)this.Handle);
+
+            //设置剪贴板监视
+            nextClipboardViewer = (IntPtr)SetClipboardViewer((int)this.Handle);
+
+            //设置托盘图标
             notifyIcon.Visible = true;
             notifyIcon.Text = "Windows Board正收集剪贴板数据";
             notifyIcon.Icon =  new System.Drawing.Icon(Application.GetResourceStream(new Uri("pack://application:,,,/Image/clipboardicon.ico")).Stream,new System.Drawing.Size(106,128));//Environment.CurrentDirectory + "\\Img\\icon.ico"); //System.Drawing.Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath);
             notifyIcon.MouseClick += NotifyIcon_MouseClick;
+
+            //设置托盘菜单
             System.Windows.Forms.MenuItem Exit = new System.Windows.Forms.MenuItem("退出",Exit_OnClick);
             System.Windows.Forms.MenuItem AutoRun = new System.Windows.Forms.MenuItem("开机时启动",AutoRun_Onclick);
             System.Windows.Forms.MenuItem ShowSign = new System.Windows.Forms.MenuItem("显示气泡", ShowSign_Onclick);
             System.Windows.Forms.MenuItem ViewEnable = new System.Windows.Forms.MenuItem("开启剪贴板监视", ViewEnable_Onclick);
             System.Windows.Forms.MenuItem AddHelp = new System.Windows.Forms.MenuItem("显示教程", AddHelp_Onclick);
-
             Enable = ViewEnable.Checked = true;
+
+            //如果未开启监视则显示暂停监视横幅
             Board.ViewerStateTip.Visibility = ViewEnable.Checked ? Visibility.Hidden : Visibility.Visible;
-            ShowSign.Checked = (string)AppRegedit.Get("ShowSign","True")=="True"?true:false;
-            if ((string)AppRegedit.Get("FirstRun","True")=="True") AppRegedit.AutoRun = true;
-            AutoRun.Checked = AppRegedit.AutoRun;
+
+            //加载注册表
+            AppRegistry AppReg = new AppRegistry("ClipBoardPlus", AppDomain.CurrentDomain.BaseDirectory + "/ClipBoardPlus.exe");
+            ShowSign.Checked = (bool)AppReg.Get("ShowSign");
+            if ((string)AppReg.Get("FirstRun","True")=="True") AppReg.AutoRun = true;
+            AutoRun.Checked = AppReg.AutoRun;
             notifyIcon.ContextMenu = new System.Windows.Forms.ContextMenu(new System.Windows.Forms.MenuItem[] { AddHelp,AutoRun, ShowSign, ViewEnable ,Exit });
-            if ((string)AppRegedit.Get("FirstRun", "True")=="True")
-            {
-                Board.AddHelpToTimeLine();
-                AppRegedit.Set("FirstRun", false);
-                Board.Show();
-                Board.Activate();
-            }
+
         }
         private void AddHelp_Onclick(object sender, EventArgs e)
         {
@@ -263,15 +223,6 @@ namespace WindowsBoard
             TopMostTool.SetTopCustomBar(this.Title);
             Clean.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Image/Clean.png"));
             ScreenShoot.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Image/ScreenShot.png"));
-
-            //if(File.Exists(DataFile))
-            //{
-            //    //==========================================================================
-            //}
-            //else
-            //{
-            //    File.Create(DataFile);
-            //}
         }
 
         public void Viewer_OnClipBoardChange()
